@@ -2,12 +2,12 @@ import os
 import gradio as gr
 
 from modules import localization, shared, scripts
-from modules.paths import script_path, data_path, cwd
+from modules.paths import script_path, data_path
 
 
 def webpath(fn):
-    if fn.startswith(cwd):
-        web_path = os.path.relpath(fn, cwd)
+    if fn.startswith(script_path):
+        web_path = os.path.relpath(fn, script_path).replace('\\', '/')
     else:
         web_path = os.path.abspath(fn)
 

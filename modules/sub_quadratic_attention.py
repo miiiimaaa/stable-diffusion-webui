@@ -15,7 +15,7 @@ import torch
 from torch import Tensor
 from torch.utils.checkpoint import checkpoint
 import math
-from typing import Optional, NamedTuple
+from typing import Optional, NamedTuple, List
 
 
 def narrow_trunc(
@@ -97,7 +97,7 @@ def _query_chunk_attention(
         )
         return summarize_chunk(query, key_chunk, value_chunk)
 
-    chunks: list[AttnChunk] = [
+    chunks: List[AttnChunk] = [
         chunk_scanner(chunk) for chunk in torch.arange(0, k_tokens, kv_chunk_size)
     ]
     acc_chunk = AttnChunk(*map(torch.stack, zip(*chunks)))

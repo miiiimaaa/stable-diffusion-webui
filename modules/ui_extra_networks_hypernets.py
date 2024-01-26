@@ -13,10 +13,7 @@ class ExtraNetworksPageHypernetworks(ui_extra_networks.ExtraNetworksPage):
         shared.reload_hypernetworks()
 
     def create_item(self, name, index=None, enable_filter=True):
-        full_path = shared.hypernetworks.get(name)
-        if full_path is None:
-            return
-
+        full_path = shared.hypernetworks[name]
         path, ext = os.path.splitext(full_path)
         sha256 = sha256_from_cache(full_path, f'hypernet/{name}')
         shorthash = sha256[0:10] if sha256 else None
@@ -34,12 +31,8 @@ class ExtraNetworksPageHypernetworks(ui_extra_networks.ExtraNetworksPage):
         }
 
     def list_items(self):
-        # instantiate a list to protect against concurrent modification
-        names = list(shared.hypernetworks)
-        for index, name in enumerate(names):
-            item = self.create_item(name, index)
-            if item is not None:
-                yield item
+        for index, name in enumerate(shared.hypernetworks):
+            yield self.create_item(name, index)
 
     def allowed_directories_for_previews(self):
         return [shared.cmd_opts.hypernetwork_dir]

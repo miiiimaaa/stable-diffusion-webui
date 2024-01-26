@@ -12,8 +12,6 @@ function isMobile() {
 }
 
 function reportWindowSize() {
-    if (gradioApp().querySelector('.toprow-compact-tools')) return; // not applicable for compact prompt layout
-
     var currentlyMobile = isMobile();
     if (currentlyMobile == isSetupForMobile) return;
     isSetupForMobile = currentlyMobile;

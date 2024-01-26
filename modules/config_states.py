@@ -4,6 +4,7 @@ Supports saving and restoring webui and extensions from a known working set of c
 
 import os
 import json
+import time
 import tqdm
 
 from datetime import datetime
@@ -37,7 +38,7 @@ def list_config_states():
     config_states = sorted(config_states, key=lambda cs: cs["created_at"], reverse=True)
 
     for cs in config_states:
-        timestamp = datetime.fromtimestamp(cs["created_at"]).strftime('%Y-%m-%d %H:%M:%S')
+        timestamp = time.asctime(time.gmtime(cs["created_at"]))
         name = cs.get("name", "Config")
         full_name = f"{name}: {timestamp}"
         all_config_states[full_name] = cs
