@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ## 1.6.1
 
 ### Bug Fixes:
@@ -151,6 +152,8 @@
  * get progressbar to display correctly in extensions tab
 
 
+=======
+>>>>>>> Stashed changes
 ## 1.5.2
 
 ### Bug Fixes:
